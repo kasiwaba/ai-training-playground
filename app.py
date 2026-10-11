@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 MIN_ARGUMENT_COUNT = 1
@@ -20,6 +21,7 @@ def create_greeting(name: str) -> str:
     """
     if not name.strip():
         raise ValueError("名前を入力してください")
+
     return f"こんにちは、{name}さん"
 
 
@@ -39,8 +41,12 @@ def main(args: list[str]) -> int:
         logging.error("使い方: python app_initial.py <名前>")
         return 1
 
-    t    t    t    t    t= create_greeting(args[0])
-                                                              r))                  
+    try:
+        message = create_greeting(args[0])
+    except ValueError as error:
+        logging.error(str(error))
+        return 1
+
     logging.info(message)
     return 0
 
